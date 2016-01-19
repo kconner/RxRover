@@ -14,12 +14,22 @@ struct Rover {
     let solMax: Int
     let cameras: [Camera]
 
+    static let defaultRover: Rover! = {
+        return Rover.roverFromJSONFile(NSBundle.mainBundle().pathForResource("defaultRover", ofType: "json")!)!
+    }()
+
     var defaultQuery: Query {
         guard let firstCamera = cameras.first else {
             preconditionFailure("Rover should have at least one camera.")
         }
 
         return Query(sol: solMax, cameraName: firstCamera.name)
+    }
+
+    func queryIsValid(query: Query) -> Bool {
+        return 0 <= query.sol && query.sol <= solMax && cameras.contains { camera in
+            return camera.name == query.cameraName
+        }
     }
 
     static func roverFromPlistValue(value: AnyObject?) -> Rover? {

@@ -18,9 +18,11 @@ final class PhotoGridViewController: UICollectionViewController {
     }
 
     // The rover affects our querying options.
-    var rover = Rover.roverFromJSONFile(NSBundle.mainBundle().pathForResource("defaultRover", ofType: "json")!)!
+//    var roverPublisher = PublishSubject<Rover>()
+    var rover = Rover.defaultRover
 
     // The query affects requests, which affect the data.
+//    var queryPublisher = PublishSubject<Query>()
     lazy var query: Query = {
         return self.rover.defaultQuery
     }()
@@ -43,25 +45,9 @@ final class PhotoGridViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        // TODO:
         // When the rover changes, validate the query, and if it's invalid, replace it.
-
         // When the query changes, re-run the request and set the data.
-        rx_observe(Query.self, "query").subscribeNext { [weak self] query in
-            guard let query = query, let strongSelf = self else {
-                return
-            }
-
-            Requests.photosRequestWithQuery(query).subscribeNext { photos in
-                self?.data = Data(heading: query.cameraName, photos: photos)
-            }.addDisposableTo(strongSelf.disposeBag)
-        }.addDisposableTo(disposeBag)
-
         // When the data changes, reload the collection view.
-        rx_observe(Data.self, "data").subscribeNext { [weak self] _ in
-            self?.collectionView?.reloadData()
-        }.addDisposableTo(disposeBag)
-
         // When the item size changes, change the collection view layout.
 
         // Implement collection view data source and delegate methods.

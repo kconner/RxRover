@@ -27,9 +27,3 @@ struct Camera {
     }
     
 }
-
-extension Camera: Equatable {}
-
-func ==(lhs: Camera, rhs: Camera) -> Bool {
-    return lhs.name == rhs.name
-}
