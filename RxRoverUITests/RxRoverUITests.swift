@@ -1,6 +1,6 @@
 //
-//  RxSampleUITests.swift
-//  RxSampleUITests
+//  RxRoverUITests.swift
+//  RxRoverUITests
 //
 //  Created by Kevin Conner on 1/18/16.
 //  Copyright © 2016 Kevin Conner. All rights reserved.
@@ -8,7 +8,7 @@
 
 import XCTest
 
-class RxSampleUITests: XCTestCase {
+class RxRoverUITests: XCTestCase {
         
     override func setUp() {
         super.setUp()

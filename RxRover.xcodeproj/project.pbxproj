@@ -8,12 +8,17 @@
 
 /* Begin PBXBuildFile section */
 		0A8111B51C4DB99800A219A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111B41C4DB99800A219A9 /* AppDelegate.swift */; };
-		0A8111B71C4DB99800A219A9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111B61C4DB99800A219A9 /* ViewController.swift */; };
+		0A8111B71C4DB99800A219A9 /* PhotoGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111B61C4DB99800A219A9 /* PhotoGridViewController.swift */; };
 		0A8111BA1C4DB99800A219A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8111B81C4DB99800A219A9 /* Main.storyboard */; };
 		0A8111BC1C4DB99800A219A9 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0A8111BB1C4DB99800A219A9 /* Assets.xcassets */; };
 		0A8111BF1C4DB99800A219A9 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8111BD1C4DB99800A219A9 /* LaunchScreen.storyboard */; };
-		0A8111CA1C4DB99800A219A9 /* RxSampleTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111C91C4DB99800A219A9 /* RxSampleTests.swift */; };
-		0A8111D51C4DB99800A219A9 /* RxSampleUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111D41C4DB99800A219A9 /* RxSampleUITests.swift */; };
+		0A8111CA1C4DB99800A219A9 /* RxRoverTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111C91C4DB99800A219A9 /* RxRoverTests.swift */; };
+		0A8111D51C4DB99800A219A9 /* RxRoverUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111D41C4DB99800A219A9 /* RxRoverUITests.swift */; };
+		0A8111E31C4DC95500A219A9 /* Rover.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111E21C4DC95500A219A9 /* Rover.swift */; };
+		0A8111E51C4DCB0900A219A9 /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111E41C4DCB0900A219A9 /* Camera.swift */; };
+		0A8111E71C4DCBA200A219A9 /* Photo.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111E61C4DCBA200A219A9 /* Photo.swift */; };
+		0A8111E91C4DCC3100A219A9 /* MapPlist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111E81C4DCC3100A219A9 /* MapPlist.swift */; };
+		0A8111EB1C4DCEBD00A219A9 /* defaultRover.json in Resources */ = {isa = PBXBuildFile; fileRef = 0A8111EA1C4DCEBD00A219A9 /* defaultRover.json */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -22,31 +27,36 @@
 			containerPortal = 0A8111A91C4DB99800A219A9 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0A8111B01C4DB99800A219A9;
-			remoteInfo = RxSample;
+			remoteInfo = RxRover;
 		};
 		0A8111D11C4DB99800A219A9 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 0A8111A91C4DB99800A219A9 /* Project object */;
 			proxyType = 1;
 			remoteGlobalIDString = 0A8111B01C4DB99800A219A9;
-			remoteInfo = RxSample;
+			remoteInfo = RxRover;
 		};
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0A8111B11C4DB99800A219A9 /* RxSample.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxSample.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A8111B11C4DB99800A219A9 /* RxRover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxRover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8111B41C4DB99800A219A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0A8111B61C4DB99800A219A9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0A8111B61C4DB99800A219A9 /* PhotoGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridViewController.swift; sourceTree = "<group>"; };
 		0A8111B91C4DB99800A219A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		0A8111BB1C4DB99800A219A9 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0A8111BE1C4DB99800A219A9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0A8111C01C4DB99800A219A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A8111C51C4DB99800A219A9 /* RxSampleTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxSampleTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A8111C91C4DB99800A219A9 /* RxSampleTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSampleTests.swift; sourceTree = "<group>"; };
+		0A8111C51C4DB99800A219A9 /* RxRover.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxRover.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A8111C91C4DB99800A219A9 /* RxRoverTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxRoverTests.swift; sourceTree = "<group>"; };
 		0A8111CB1C4DB99800A219A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		0A8111D01C4DB99800A219A9 /* RxSampleUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxSampleUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		0A8111D41C4DB99800A219A9 /* RxSampleUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxSampleUITests.swift; sourceTree = "<group>"; };
+		0A8111D01C4DB99800A219A9 /* RxRover.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RxRover.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		0A8111D41C4DB99800A219A9 /* RxRoverUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RxRoverUITests.swift; sourceTree = "<group>"; };
 		0A8111D61C4DB99800A219A9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0A8111E21C4DC95500A219A9 /* Rover.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Rover.swift; sourceTree = "<group>"; };
+		0A8111E41C4DCB0900A219A9 /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
+		0A8111E61C4DCBA200A219A9 /* Photo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Photo.swift; sourceTree = "<group>"; };
+		0A8111E81C4DCC3100A219A9 /* MapPlist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MapPlist.swift; sourceTree = "<group>"; };
+		0A8111EA1C4DCEBD00A219A9 /* defaultRover.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = defaultRover.json; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -77,9 +87,9 @@
 		0A8111A81C4DB99800A219A9 = {
 			isa = PBXGroup;
 			children = (
-				0A8111B31C4DB99800A219A9 /* RxSample */,
-				0A8111C81C4DB99800A219A9 /* RxSampleTests */,
-				0A8111D31C4DB99800A219A9 /* RxSampleUITests */,
+				0A8111B31C4DB99800A219A9 /* RxRover */,
+				0A8111C81C4DB99800A219A9 /* RxRoverTests */,
+				0A8111D31C4DB99800A219A9 /* RxRoverUITests */,
 				0A8111B21C4DB99800A219A9 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -87,50 +97,55 @@
 		0A8111B21C4DB99800A219A9 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				0A8111B11C4DB99800A219A9 /* RxSample.app */,
-				0A8111C51C4DB99800A219A9 /* RxSampleTests.xctest */,
-				0A8111D01C4DB99800A219A9 /* RxSampleUITests.xctest */,
+				0A8111B11C4DB99800A219A9 /* RxRover.app */,
+				0A8111C51C4DB99800A219A9 /* RxRover.xctest */,
+				0A8111D01C4DB99800A219A9 /* RxRover.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
 		};
-		0A8111B31C4DB99800A219A9 /* RxSample */ = {
+		0A8111B31C4DB99800A219A9 /* RxRover */ = {
 			isa = PBXGroup;
 			children = (
 				0A8111B41C4DB99800A219A9 /* AppDelegate.swift */,
-				0A8111B61C4DB99800A219A9 /* ViewController.swift */,
+				0A8111B61C4DB99800A219A9 /* PhotoGridViewController.swift */,
 				0A8111B81C4DB99800A219A9 /* Main.storyboard */,
 				0A8111BB1C4DB99800A219A9 /* Assets.xcassets */,
 				0A8111BD1C4DB99800A219A9 /* LaunchScreen.storyboard */,
 				0A8111C01C4DB99800A219A9 /* Info.plist */,
+				0A8111EA1C4DCEBD00A219A9 /* defaultRover.json */,
+				0A8111E81C4DCC3100A219A9 /* MapPlist.swift */,
+				0A8111E21C4DC95500A219A9 /* Rover.swift */,
+				0A8111E41C4DCB0900A219A9 /* Camera.swift */,
+				0A8111E61C4DCBA200A219A9 /* Photo.swift */,
 			);
-			path = RxSample;
+			path = RxRover;
 			sourceTree = "<group>";
 		};
-		0A8111C81C4DB99800A219A9 /* RxSampleTests */ = {
+		0A8111C81C4DB99800A219A9 /* RxRoverTests */ = {
 			isa = PBXGroup;
 			children = (
-				0A8111C91C4DB99800A219A9 /* RxSampleTests.swift */,
+				0A8111C91C4DB99800A219A9 /* RxRoverTests.swift */,
 				0A8111CB1C4DB99800A219A9 /* Info.plist */,
 			);
-			path = RxSampleTests;
+			path = RxRoverTests;
 			sourceTree = "<group>";
 		};
-		0A8111D31C4DB99800A219A9 /* RxSampleUITests */ = {
+		0A8111D31C4DB99800A219A9 /* RxRoverUITests */ = {
 			isa = PBXGroup;
 			children = (
-				0A8111D41C4DB99800A219A9 /* RxSampleUITests.swift */,
+				0A8111D41C4DB99800A219A9 /* RxRoverUITests.swift */,
 				0A8111D61C4DB99800A219A9 /* Info.plist */,
 			);
-			path = RxSampleUITests;
+			path = RxRoverUITests;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		0A8111B01C4DB99800A219A9 /* RxSample */ = {
+		0A8111B01C4DB99800A219A9 /* RxRover */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A8111D91C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxSample" */;
+			buildConfigurationList = 0A8111D91C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxRover" */;
 			buildPhases = (
 				0A8111AD1C4DB99800A219A9 /* Sources */,
 				0A8111AE1C4DB99800A219A9 /* Frameworks */,
@@ -140,14 +155,14 @@
 			);
 			dependencies = (
 			);
-			name = RxSample;
-			productName = RxSample;
-			productReference = 0A8111B11C4DB99800A219A9 /* RxSample.app */;
+			name = RxRover;
+			productName = RxRover;
+			productReference = 0A8111B11C4DB99800A219A9 /* RxRover.app */;
 			productType = "com.apple.product-type.application";
 		};
-		0A8111C41C4DB99800A219A9 /* RxSampleTests */ = {
+		0A8111C41C4DB99800A219A9 /* RxRoverTests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A8111DC1C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxSampleTests" */;
+			buildConfigurationList = 0A8111DC1C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxRoverTests" */;
 			buildPhases = (
 				0A8111C11C4DB99800A219A9 /* Sources */,
 				0A8111C21C4DB99800A219A9 /* Frameworks */,
@@ -158,14 +173,14 @@
 			dependencies = (
 				0A8111C71C4DB99800A219A9 /* PBXTargetDependency */,
 			);
-			name = RxSampleTests;
-			productName = RxSampleTests;
-			productReference = 0A8111C51C4DB99800A219A9 /* RxSampleTests.xctest */;
+			name = RxRoverTests;
+			productName = RxRoverTests;
+			productReference = 0A8111C51C4DB99800A219A9 /* RxRover.xctest */;
 			productType = "com.apple.product-type.bundle.unit-test";
 		};
-		0A8111CF1C4DB99800A219A9 /* RxSampleUITests */ = {
+		0A8111CF1C4DB99800A219A9 /* RxRoverUITests */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 0A8111DF1C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxSampleUITests" */;
+			buildConfigurationList = 0A8111DF1C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxRoverUITests" */;
 			buildPhases = (
 				0A8111CC1C4DB99800A219A9 /* Sources */,
 				0A8111CD1C4DB99800A219A9 /* Frameworks */,
@@ -176,9 +191,9 @@
 			dependencies = (
 				0A8111D21C4DB99800A219A9 /* PBXTargetDependency */,
 			);
-			name = RxSampleUITests;
-			productName = RxSampleUITests;
-			productReference = 0A8111D01C4DB99800A219A9 /* RxSampleUITests.xctest */;
+			name = RxRoverUITests;
+			productName = RxRoverUITests;
+			productReference = 0A8111D01C4DB99800A219A9 /* RxRover.xctest */;
 			productType = "com.apple.product-type.bundle.ui-testing";
 		};
 /* End PBXNativeTarget section */
@@ -204,7 +219,7 @@
 					};
 				};
 			};
-			buildConfigurationList = 0A8111AC1C4DB99800A219A9 /* Build configuration list for PBXProject "RxSample" */;
+			buildConfigurationList = 0A8111AC1C4DB99800A219A9 /* Build configuration list for PBXProject "RxRover" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -217,9 +232,9 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				0A8111B01C4DB99800A219A9 /* RxSample */,
-				0A8111C41C4DB99800A219A9 /* RxSampleTests */,
-				0A8111CF1C4DB99800A219A9 /* RxSampleUITests */,
+				0A8111B01C4DB99800A219A9 /* RxRover */,
+				0A8111C41C4DB99800A219A9 /* RxRoverTests */,
+				0A8111CF1C4DB99800A219A9 /* RxRoverUITests */,
 			);
 		};
 /* End PBXProject section */
@@ -229,6 +244,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0A8111EB1C4DCEBD00A219A9 /* defaultRover.json in Resources */,
 				0A8111BF1C4DB99800A219A9 /* LaunchScreen.storyboard in Resources */,
 				0A8111BC1C4DB99800A219A9 /* Assets.xcassets in Resources */,
 				0A8111BA1C4DB99800A219A9 /* Main.storyboard in Resources */,
@@ -256,8 +272,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A8111B71C4DB99800A219A9 /* ViewController.swift in Sources */,
+				0A8111E51C4DCB0900A219A9 /* Camera.swift in Sources */,
+				0A8111B71C4DB99800A219A9 /* PhotoGridViewController.swift in Sources */,
 				0A8111B51C4DB99800A219A9 /* AppDelegate.swift in Sources */,
+				0A8111E31C4DC95500A219A9 /* Rover.swift in Sources */,
+				0A8111E71C4DCBA200A219A9 /* Photo.swift in Sources */,
+				0A8111E91C4DCC3100A219A9 /* MapPlist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,7 +285,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A8111CA1C4DB99800A219A9 /* RxSampleTests.swift in Sources */,
+				0A8111CA1C4DB99800A219A9 /* RxRoverTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -273,7 +293,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				0A8111D51C4DB99800A219A9 /* RxSampleUITests.swift in Sources */,
+				0A8111D51C4DB99800A219A9 /* RxRoverUITests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -282,12 +302,12 @@
 /* Begin PBXTargetDependency section */
 		0A8111C71C4DB99800A219A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0A8111B01C4DB99800A219A9 /* RxSample */;
+			target = 0A8111B01C4DB99800A219A9 /* RxRover */;
 			targetProxy = 0A8111C61C4DB99800A219A9 /* PBXContainerItemProxy */;
 		};
 		0A8111D21C4DB99800A219A9 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
-			target = 0A8111B01C4DB99800A219A9 /* RxSample */;
+			target = 0A8111B01C4DB99800A219A9 /* RxRover */;
 			targetProxy = 0A8111D11C4DB99800A219A9 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
@@ -399,10 +419,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = RxSample/Info.plist;
+				INFOPLIST_FILE = RxRover/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxSample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxRover;
+				PRODUCT_NAME = RxRover;
 			};
 			name = Debug;
 		};
@@ -410,10 +430,10 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				INFOPLIST_FILE = RxSample/Info.plist;
+				INFOPLIST_FILE = RxRover/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxSample;
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxRover;
+				PRODUCT_NAME = RxRover;
 			};
 			name = Release;
 		};
@@ -421,11 +441,11 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = RxSampleTests/Info.plist;
+				INFOPLIST_FILE = RxRoverTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxSampleTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RxSample.app/RxSample";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxRoverTests;
+				PRODUCT_NAME = RxRover;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RxRover.app/RxRover";
 			};
 			name = Debug;
 		};
@@ -433,22 +453,22 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
-				INFOPLIST_FILE = RxSampleTests/Info.plist;
+				INFOPLIST_FILE = RxRoverTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxSampleTests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RxSample.app/RxSample";
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxRoverTests;
+				PRODUCT_NAME = RxRover;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/RxRover.app/RxRover";
 			};
 			name = Release;
 		};
 		0A8111E01C4DB99800A219A9 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = RxSampleUITests/Info.plist;
+				INFOPLIST_FILE = RxRoverUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxSampleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = RxSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxRoverUITests;
+				PRODUCT_NAME = RxRover;
+				TEST_TARGET_NAME = RxRover;
 				USES_XCTRUNNER = YES;
 			};
 			name = Debug;
@@ -456,11 +476,11 @@
 		0A8111E11C4DB99800A219A9 /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				INFOPLIST_FILE = RxSampleUITests/Info.plist;
+				INFOPLIST_FILE = RxRoverUITests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxSampleUITests;
-				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_TARGET_NAME = RxSample;
+				PRODUCT_BUNDLE_IDENTIFIER = com.kevinconner.RxRoverUITests;
+				PRODUCT_NAME = RxRover;
+				TEST_TARGET_NAME = RxRover;
 				USES_XCTRUNNER = YES;
 			};
 			name = Release;
@@ -468,7 +488,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		0A8111AC1C4DB99800A219A9 /* Build configuration list for PBXProject "RxSample" */ = {
+		0A8111AC1C4DB99800A219A9 /* Build configuration list for PBXProject "RxRover" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A8111D71C4DB99800A219A9 /* Debug */,
@@ -477,29 +497,32 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		0A8111D91C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxSample" */ = {
+		0A8111D91C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxRover" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A8111DA1C4DB99800A219A9 /* Debug */,
 				0A8111DB1C4DB99800A219A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		0A8111DC1C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxSampleTests" */ = {
+		0A8111DC1C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxRoverTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A8111DD1C4DB99800A219A9 /* Debug */,
 				0A8111DE1C4DB99800A219A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
-		0A8111DF1C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxSampleUITests" */ = {
+		0A8111DF1C4DB99800A219A9 /* Build configuration list for PBXNativeTarget "RxRoverUITests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				0A8111E01C4DB99800A219A9 /* Debug */,
 				0A8111E11C4DB99800A219A9 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
