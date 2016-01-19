@@ -14,6 +14,14 @@ struct Rover {
     let solMax: Int
     let cameras: [Camera]
 
+    var defaultQuery: Query {
+        guard let firstCamera = cameras.first else {
+            preconditionFailure("Rover should have at least one camera.")
+        }
+
+        return Query(sol: solMax, cameraName: firstCamera.name)
+    }
+
     static func roverFromPlistValue(value: AnyObject?) -> Rover? {
         guard let dictionary = MapPlist.dictionary(value),
             let name = MapPlist.string(dictionary["name"]),
