@@ -114,6 +114,8 @@ final class PhotoGridViewController: UICollectionViewController {
         return photoCell
     }
 
+    // MARK: UICollectionViewDelegate
+
     override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         let photoCell = cell as! PhotoCell
 

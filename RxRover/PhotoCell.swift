@@ -38,8 +38,10 @@ final class PhotoCell: UICollectionViewCell {
             }
             .switchLatest()
             .observeOn(MainScheduler.instance)
-            .subscribeNext { [unowned self] image in
-                self.imageView.image = image
+            .subscribeNext { [weak self] image in
+                // Not sure how this can ever be nil when we are observing on the main thread?
+                // Self should destroy the observer when disposing.
+                self?.imageView.image = image
             }
             .addDisposableTo(disposeBag)
     }
