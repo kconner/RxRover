@@ -34,9 +34,7 @@
                             <outlet property="delegate" destination="djw-5Q-OqT" id="69V-XB-UuH"/>
                         </connections>
                     </collectionView>
-                    <toolbarItems>
-                        <barButtonItem title="Item" id="Nyr-el-tf2"/>
-                    </toolbarItems>
+                    <toolbarItems/>
                     <navigationItem key="navigationItem" id="ew4-WQ-NCq">
                         <barButtonItem key="leftBarButtonItem" title="Camera" id="7IA-SY-4uf"/>
                         <barButtonItem key="rightBarButtonItem" id="DkK-KP-G4o">
@@ -64,11 +62,15 @@
         <!--Navigation Controller-->
         <scene sceneID="YpC-rd-esh">
             <objects>
-                <navigationController id="FTX-em-GS0" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="jxy-D6-bGl">
+                <navigationController toolbarHidden="NO" id="FTX-em-GS0" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" barStyle="black" id="jxy-D6-bGl">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
+                    <toolbar key="toolbar" opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" barStyle="black" id="P2W-Ba-9Hl">
+                        <rect key="frame" x="0.0" y="556" width="600" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </toolbar>
                     <connections>
                         <segue destination="djw-5Q-OqT" kind="relationship" relationship="rootViewController" id="sVH-aJ-p4a"/>
                     </connections>

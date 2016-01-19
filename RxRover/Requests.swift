@@ -32,7 +32,13 @@ final class Requests {
             } else {
                 return (nil, photos)
             }
+        }
+    }
 
+    class func imageRequestWithURL(URL: NSURL) -> Observable<UIImage?> {
+        let request = NSURLRequest(URL: URL)
+        return NSURLSession.sharedSession().rx_data(request).map { data in
+            return UIImage(data: data)
         }
     }
 

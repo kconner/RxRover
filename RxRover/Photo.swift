@@ -28,4 +28,14 @@ struct Photo {
 
 }
 
+extension Photo: Hashable {
 
+    var hashValue: Int {
+        return identifier
+    }
+
+}
+
+func ==(lhs: Photo, rhs: Photo) -> Bool {
+    return lhs.identifier == rhs.identifier
+}

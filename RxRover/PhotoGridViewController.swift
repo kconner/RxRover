@@ -22,6 +22,7 @@ final class PhotoGridViewController: UICollectionViewController {
 
     // The query affects requests, which affect the data.
     private let query = Variable(Query(sol: 1000000, cameraName: "BogusCam"))
+    // TODO: set cameraName when we select a camera in the cameras modal view
 
     // The data affects what the collection view displays.
     private let data = Variable(Data(title: "Not yet loaded.", photos: []))
@@ -92,7 +93,6 @@ final class PhotoGridViewController: UICollectionViewController {
             UIBarButtonItem(customView: itemSizeSlider),
             UIBarButtonItem(barButtonSystemItem: .FlexibleSpace, target: nil, action: nil),
         ]
-        navigationController?.toolbarHidden = false
 
         collectionView?.registerNib(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: PhotoCell.cellIdentifier)
 

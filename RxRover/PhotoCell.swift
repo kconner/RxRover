@@ -14,13 +14,12 @@ final class PhotoCell: UICollectionViewCell {
     static let cellIdentifier = "PhotoCell"
 
     let photo = Variable<Photo?>(nil)
+    let disposeBag = DisposeBag()
 
     @IBOutlet var imageView: UIImageView!
 
     override func awakeFromNib() {
         super.awakeFromNib()
-
-        backgroundColor = UIColor.lightGrayColor()
 
         conjureDemons()
     }
@@ -28,7 +27,21 @@ final class PhotoCell: UICollectionViewCell {
     // MARK: Helpers
 
     private func conjureDemons() {
-        // TODO: When photo changes, fetch the image from the image cache and display it
+        // When the photo is set, pull its image from its image cache entry. When cleared, clear the photo.
+        photo.asObservable()
+            .map { photo -> Observable<UIImage?> in
+                guard let photo = photo else {
+                    return .just(nil)
+                }
+
+                return ImageCache.sharedCache[photo]
+            }
+            .switchLatest()
+            .observeOn(MainScheduler.instance)
+            .subscribeNext { [unowned self] image in
+                self.imageView.image = image
+            }
+            .addDisposableTo(disposeBag)
     }
 
 }
