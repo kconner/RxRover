@@ -14,7 +14,7 @@ struct Rover {
     let solMax: Int
     let cameras: [Camera]
 
-    static let defaultRover: Rover! = {
+    static let defaultRover: Rover = {
         return Rover.roverFromJSONFile(NSBundle.mainBundle().pathForResource("defaultRover", ofType: "json")!)!
     }()
 

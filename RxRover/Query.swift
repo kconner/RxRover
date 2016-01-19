@@ -14,9 +14,13 @@ struct Query {
     var cameraName: String
 
     func URLWithAPIKey(APIKey: String) -> NSURL {
-        let solComponent = String(sol).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-        let cameraNameComponent = cameraName.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
-        let APIKeyComponent = APIKey.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+        guard let solComponent = String(sol).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()),
+            let cameraNameComponent = cameraName.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()),
+            let APIKeyComponent = APIKey.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet())
+            else
+        {
+            preconditionFailure("Failed to encode URL query components.")
+        }
 
         let URLString = "https://api.nasa.gov/mars-photos/api/v1/rovers/curiosity/photos?sol=\(solComponent)&camera=\(cameraNameComponent)&api_key=\(APIKeyComponent)"
         guard let URL = NSURL(string: URLString) else {

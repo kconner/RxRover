@@ -12,7 +12,7 @@
                     <collectionView key="view" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" id="eSY-3L-45R">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="MPp-XW-0FP">
+                        <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="5" minimumInteritemSpacing="5" id="MPp-XW-0FP">
                             <size key="itemSize" width="50" height="50"/>
                             <size key="headerReferenceSize" width="0.0" height="0.0"/>
                             <size key="footerReferenceSize" width="0.0" height="0.0"/>
@@ -34,21 +34,30 @@
                             <outlet property="delegate" destination="djw-5Q-OqT" id="69V-XB-UuH"/>
                         </connections>
                     </collectionView>
+                    <toolbarItems>
+                        <barButtonItem title="Item" id="Nyr-el-tf2"/>
+                    </toolbarItems>
                     <navigationItem key="navigationItem" id="ew4-WQ-NCq">
                         <barButtonItem key="leftBarButtonItem" title="Camera" id="7IA-SY-4uf"/>
                         <barButtonItem key="rightBarButtonItem" id="DkK-KP-G4o">
-                            <stepper key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" maximumValue="100" id="jDH-u8-Qnz">
+                            <stepper key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" id="jDH-u8-Qnz">
                                 <rect key="frame" x="486" y="7" width="94" height="29"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </stepper>
                         </barButtonItem>
                     </navigationItem>
+                    <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
                         <outlet property="cameraButtonItem" destination="7IA-SY-4uf" id="1g9-5H-Irx"/>
+                        <outlet property="itemSizeSlider" destination="SrQ-rL-DU8" id="O6K-Tk-cYi"/>
                         <outlet property="solStepper" destination="jDH-u8-Qnz" id="ZL9-rM-5y1"/>
                     </connections>
                 </collectionViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="xfH-Lc-MYh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="76" minValue="76" maxValue="310" id="SrQ-rL-DU8">
+                    <rect key="frame" x="0.0" y="0.0" width="284" height="31"/>
+                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                </slider>
             </objects>
             <point key="canvasLocation" x="109" y="192"/>
         </scene>
