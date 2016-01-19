@@ -7,12 +7,14 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 final class PhotoGridViewController: UICollectionViewController {
 
-    enum Data {
-        case Message(String)
-        case Photos([Photo])
+    struct Data {
+        let heading: String
+        let photos: [Photo]
     }
 
     // The rover affects our querying options.
@@ -23,8 +25,8 @@ final class PhotoGridViewController: UICollectionViewController {
         return self.rover.defaultQuery
     }()
 
-    // The data affects what the view displays.
-    var data = Data.Message("Not yet loaded.")
+    // The data affects what the collection view displays.
+    var data = Data(heading: "Not yet loaded.", photos: [])
 
     // Item size affects how the view is laid out.
     var itemSize: CGFloat = 10.0
@@ -39,6 +41,18 @@ final class PhotoGridViewController: UICollectionViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        // TODO:
+        // When the rover changes, validate the query, and if it's invalid, replace it.
+        // When the query changes, re-run the request.
+        // When the request completes, parse the JSON and set the data.
+        // When the data changes, reload the collection view.
+        // When the item size changes, change the collection view layout.
+
+        // Implement collection view data source and delegate methods.
+        // When a cell comes on the screen, subscribe it to its image subject, unsubscribing from another if necessary.
+        // When a cell leaves the screen, unsubscribe it.
+
+        // Run the request.
     }
 
 }
