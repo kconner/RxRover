@@ -31,6 +31,8 @@ final class PhotoGridViewController: UICollectionViewController {
     // Item size affects how the view is laid out.
     var itemSize: CGFloat = 10.0
 
+    let disposeBag = DisposeBag()
+
     @IBOutlet var cameraButtonItem: UIBarButtonItem!
     @IBOutlet var solStepper: UIStepper!
 
@@ -43,9 +45,23 @@ final class PhotoGridViewController: UICollectionViewController {
 
         // TODO:
         // When the rover changes, validate the query, and if it's invalid, replace it.
-        // When the query changes, re-run the request.
-        // When the request completes, parse the JSON and set the data.
+
+        // When the query changes, re-run the request and set the data.
+        rx_observe(Query.self, "query").subscribeNext { [weak self] query in
+            guard let query = query, let strongSelf = self else {
+                return
+            }
+
+            Requests.photosRequestWithQuery(query).subscribeNext { photos in
+                self?.data = Data(heading: query.cameraName, photos: photos)
+            }.addDisposableTo(strongSelf.disposeBag)
+        }.addDisposableTo(disposeBag)
+
         // When the data changes, reload the collection view.
+        rx_observe(Data.self, "data").subscribeNext { [weak self] _ in
+            self?.collectionView?.reloadData()
+        }.addDisposableTo(disposeBag)
+
         // When the item size changes, change the collection view layout.
 
         // Implement collection view data source and delegate methods.

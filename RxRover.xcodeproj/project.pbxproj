@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0A0752AE1C4DD1B100A9651F /* Query.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0752AD1C4DD1B100A9651F /* Query.swift */; };
+		0A0752B21C4DE3A200A9651F /* Requests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A0752B11C4DE3A200A9651F /* Requests.swift */; };
 		0A8111B51C4DB99800A219A9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111B41C4DB99800A219A9 /* AppDelegate.swift */; };
 		0A8111B71C4DB99800A219A9 /* PhotoGridViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0A8111B61C4DB99800A219A9 /* PhotoGridViewController.swift */; };
 		0A8111BA1C4DB99800A219A9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0A8111B81C4DB99800A219A9 /* Main.storyboard */; };
@@ -42,6 +43,7 @@
 
 /* Begin PBXFileReference section */
 		0A0752AD1C4DD1B100A9651F /* Query.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Query.swift; sourceTree = "<group>"; };
+		0A0752B11C4DE3A200A9651F /* Requests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Requests.swift; sourceTree = "<group>"; };
 		0A8111B11C4DB99800A219A9 /* RxRover.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RxRover.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0A8111B41C4DB99800A219A9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0A8111B61C4DB99800A219A9 /* PhotoGridViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoGridViewController.swift; sourceTree = "<group>"; };
@@ -142,6 +144,7 @@
 				0A0752B01C4DD3A900A9651F /* Resources */,
 				0A8111B41C4DB99800A219A9 /* AppDelegate.swift */,
 				0A8111B81C4DB99800A219A9 /* Main.storyboard */,
+				0A0752B11C4DE3A200A9651F /* Requests.swift */,
 				0A8111B61C4DB99800A219A9 /* PhotoGridViewController.swift */,
 				0A0752AF1C4DD36A00A9651F /* Model */,
 			);
@@ -372,6 +375,7 @@
 				0A8111B51C4DB99800A219A9 /* AppDelegate.swift in Sources */,
 				0A8111E31C4DC95500A219A9 /* Rover.swift in Sources */,
 				0A8111E71C4DCBA200A219A9 /* Photo.swift in Sources */,
+				0A0752B21C4DE3A200A9651F /* Requests.swift in Sources */,
 				0A8111E91C4DCC3100A219A9 /* MapPlist.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
