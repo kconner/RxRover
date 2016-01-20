@@ -58,7 +58,7 @@ final class PhotoGridViewController: UICollectionViewController {
                 }
 
                 return Data(title: title, photos: photos)
-            }.catchErrorJustReturn(Data(title: "Error!", photos: []))
+            }.catchErrorJustReturn(Data(title: "No Results", photos: []))
         }.switchLatest().bindTo(data).addDisposableTo(disposeBag)
 
         // When the data changes, show its title and reload the collection view.
