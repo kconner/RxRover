@@ -8,10 +8,12 @@
 
 import UIKit
 
+// A camera on the Rover.
+
 struct Camera {
     
-    let name: String
-    let fullName: String
+    let name: String // Abbreviated name. Also an API query parameter.
+    let fullName: String // Full display name.
     
     static func cameraFromPlistValue(value: AnyObject?) -> Camera? {
         guard let dictionary = MapPlist.dictionary(value),

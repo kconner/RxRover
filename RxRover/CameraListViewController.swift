@@ -9,12 +9,22 @@
 import UIKit
 import RxSwift
 
+// The Camera list should be prepared with a Rover and a selected Camera name before modal presentation.
+// It displays a cell for each of the Rover's Cameras.
+// The row matching the selected Camera name gets a checkmark.
+// When a row is selected, we select its Camera name and dismiss.
+// To collect the success value, the presenter can subscribe to selectedCameraName.
+
+// This is a pretty basic table view controller.
+// There are RxCocoa methods like UITableView.rx_itemSelected that I could use instead,
+// but for now this goes to show that you don't need to use Rx in every class to use it well.
+
 final class CameraListViewController: UITableViewController {
+
+    private static let cellIdentifier = "CameraCell"
 
     var rover: Rover!
     let selectedCameraName = Variable("")
-
-    private static let cellIdentifier = "CameraCell"
 
     // MARK: Helpers
 

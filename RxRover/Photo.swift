@@ -8,9 +8,11 @@
 
 import UIKit
 
+// A photo record returned from the API.
+
 struct Photo {
 
-    let identifier: Int
+    let identifier: Int // Unique ID.
     let photoURL: NSURL
 
     static func photoFromPlistValue(value: AnyObject?) -> Photo? {

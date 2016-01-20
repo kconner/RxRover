@@ -50,7 +50,6 @@
                     </navigationItem>
                     <simulatedToolbarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
-                        <outlet property="cameraButtonItem" destination="7IA-SY-4uf" id="1g9-5H-Irx"/>
                         <outlet property="itemSizeSlider" destination="SrQ-rL-DU8" id="O6K-Tk-cYi"/>
                         <outlet property="solStepper" destination="jDH-u8-Qnz" id="ZL9-rM-5y1"/>
                     </connections>
@@ -82,7 +81,6 @@
         <!--Camera List View Controller-->
         <scene sceneID="Vxe-GW-HCd">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="IQX-JD-FcV" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <tableViewController id="l8Y-0j-Kgg" customClass="CameraListViewController" customModule="RxRover" customModuleProvider="target" sceneMemberID="viewController">
                     <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fHJ-ow-9ds">
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
@@ -101,6 +99,7 @@
                         </barButtonItem>
                     </navigationItem>
                 </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IQX-JD-FcV" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1616" y="192"/>
         </scene>

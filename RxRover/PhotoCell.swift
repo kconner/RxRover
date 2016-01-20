@@ -9,38 +9,46 @@
 import UIKit
 import RxSwift
 
+// A collection view cell in the photo grid.
+// The preparer should set a Photo when the cell appears and clear it when the cell leaves the screen.
+// The cell observes the Photo and uses the ImageCache to get images that it sets on its imageView.
+
 final class PhotoCell: UICollectionViewCell {
 
     static let cellIdentifier = "PhotoCell"
 
     let photo = Variable<Photo?>(nil)
-    let disposeBag = DisposeBag()
 
     @IBOutlet var imageView: UIImageView!
+
+    private let disposeBag = DisposeBag()
 
     override func awakeFromNib() {
         super.awakeFromNib()
 
-        conjureDemons()
+        bindObservables()
     }
 
     // MARK: Helpers
 
-    private func conjureDemons() {
-        // When the photo is set, pull its image from its image cache entry. When cleared, clear the photo.
+    private func bindObservables() {
+        // When the photo changes, subscribe to that photo's image sequence in the ImageCache.
+        // When the cache produces an image, show it in the imageView.
         photo.asObservable()
             .map { photo -> Observable<UIImage?> in
+                // For a nil, map to a sequence with one nil image.
                 guard let photo = photo else {
                     return .just(nil)
                 }
 
+                // For a photo, map to an image sequence from the cache.
                 return ImageCache.sharedCache[photo]
             }
+            // Watch only the sequence mapped by the latest photo value.
             .switchLatest()
             .observeOn(MainScheduler.instance)
             .subscribeNext { [weak self] image in
-                // Not sure how this can ever be nil when we are observing on the main thread?
-                // Self should destroy the observer when disposing.
+                // Show or clear the image.
                 self?.imageView.image = image
             }
             .addDisposableTo(disposeBag)

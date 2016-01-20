@@ -8,6 +8,10 @@
 
 import UIKit
 
+// A package of helper methods for parsing property list values that were deserialized from JSON.
+// Mapping fuctions take the form of (deserialized JSON value) -> Optional<native type>.
+// Some model types have mapping functions that use these helpers and one another to map whole model objects.
+
 final class MapPlist {
 
     class func dictionary(value: AnyObject?) -> NSDictionary? {
@@ -30,8 +34,9 @@ final class MapPlist {
         return NSURL(string: URLString)
     }
 
-    class func array<T>(value: AnyObject?) -> ((AnyObject) -> T?) -> [T]? {
-        return { mapItem in
+    // Given a function that maps a JSON item to a native value, return a function that maps an array of such items.
+    class func array<T>(mapItem: (AnyObject) -> T?) -> (AnyObject?) -> [T]? {
+        return { value in
             guard let array = value as? NSArray else {
                 return nil
             }

@@ -8,11 +8,15 @@
 
 import UIKit
 
+// Query parameters for requesting a list of photos.
+// In this app we find the photos for a particular camera on a particular mission sol.
+
 struct Query {
 
-    var sol: Int
-    var cameraName: String
+    var sol: Int // Mission sol (Mars day), valid within 1...Rover.solMax.
+    var cameraName: String // Valid when it matches one of Rover.cameras' names.
 
+    // URL for the API request specified by these query parameters.
     func URLWithAPIKey(APIKey: String) -> NSURL {
         guard let solComponent = String(sol).stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()),
             let cameraNameComponent = cameraName.stringByAddingPercentEncodingWithAllowedCharacters(NSCharacterSet.URLQueryAllowedCharacterSet()),
@@ -30,4 +34,10 @@ struct Query {
         return URL
     }
 
+}
+
+extension Query: Equatable {}
+
+func ==(lhs: Query, rhs: Query) -> Bool {
+    return lhs.sol == rhs.sol && lhs.cameraName == rhs.cameraName
 }

@@ -10,96 +10,106 @@ import UIKit
 import RxSwift
 import RxCocoa
 
+// A view for viewing photos with controls for querying photos.
+// There are a lot of reactive behaviors in this view:
+// The user defines the Query by adjusting the stepper and using the Camera list modal view.
+// Query changes fire requests that produce new PhotoData and Rovers.
+// Rover changes affect which Queries are valid, as reflected in the stepper's limits and Camera list's options.
+// PhotoData changes update the collection view and the navigation bar title.
+// Slider adjustments affect the collection view layout.
+
 final class PhotoGridViewController: UICollectionViewController {
 
-    struct Data {
+    private struct PhotoData {
         let title: String
         let photos: [Photo]
     }
 
-    // The rover affects our querying options.
-    private let rover = Variable(Rover.defaultRover)
-
-    // The query affects requests, which affect the data.
-    private let query = Variable(Query(sol: 1000000, cameraName: "BogusCam"))
-    // TODO: set cameraName when we select a camera in the cameras modal view
-
-    // The data affects what the collection view displays.
-    private let data = Variable(Data(title: "Not yet loaded.", photos: []))
-
-    private let disposeBag = DisposeBag()
-
-    @IBOutlet var cameraButtonItem: UIBarButtonItem!
     @IBOutlet var solStepper: UIStepper!
     @IBOutlet var itemSizeSlider: UISlider!
 
+    private let rover = Variable(Rover.defaultRover)
+    private let query = Variable(Query(sol: 1000000, cameraName: "BogusCam"))
+    private let photoData = Variable(PhotoData(title: "Not yet loaded.", photos: []))
+
+    private let disposeBag = DisposeBag()
+
     // MARK: Helpers
 
-    private func conjureDemons() {
-        // When the rover changes, validate the query, and if it's invalid, replace it.
+    private func bindObservables() {
         // When the rover changes, update the stepper's limit.
+        // When the rover changes, use its new sol range and camera list to validate the query.
+        // If it's invalid, replace it with a valid query.
         rover.asObservable()
-            .subscribeNext { [unowned self] newRover in
-                if !newRover.queryIsValid(self.query.value) {
-                    self.query.value = newRover.defaultQuery
-                }
-                
-                self.solStepper.maximumValue = Double(newRover.solMax)
-            }
-            .addDisposableTo(disposeBag)
-
-        // When the query changes, run the request, compose data from its result, and save it.
-        query.asObservable()
-            .map { [unowned self] query -> Observable<Data> in
-                let title = "Sol \(query.sol)"
-                self.data.value = Data(title: title, photos: [])
-                
-                return Requests.photosRequestWithQuery(query).map { [unowned self] (rover, photos) in
-                    // As a side effect, if we found a rover, use it to update our knowledge of available cameras and sols for querying.
-                    if let rover = rover {
-                        self.rover.value = rover
-                    }
-                    
-                    return Data(title: title, photos: photos)
-                    }
-                    .catchErrorJustReturn(Data(title: "No Results", photos: []))
-            }
-            .switchLatest()
-            .bindTo(data)
-            .addDisposableTo(disposeBag)
-
-        // When the data changes, show its title and reload the collection view.
-        data.asObservable()
             .observeOn(MainScheduler.instance)
-            .subscribeNext { [unowned self] data in
-                self.navigationItem.title = data.title
-                self.collectionView?.reloadData()
+            .subscribeNext { [unowned self] newRover in
+                self.solStepper.maximumValue = Double(newRover.solMax)
+
+                if !newRover.queryIsValid(self.query.value) {
+                    let query = newRover.defaultQuery
+                    self.query.value = query
+                    self.solStepper.value = Double(query.sol)
+                }
             }
             .addDisposableTo(disposeBag)
 
         // When the stepper changes, update the query.
-        solStepper.value = Double(query.value.sol)
         solStepper.rx_value
             .map(Int.init)
-            .observeOn(MainScheduler.instance)
             .subscribeNext { [unowned self] sol in
                 self.query.value.sol = sol
             }
             .addDisposableTo(disposeBag)
 
-        // When the item size slider changes, update the item size in the layout.
-        itemSizeSlider.rx_value
-            .map(CGFloat.init)
+        // When the query changes, run a request and update photoData.
+        query.asObservable()
             .distinctUntilChanged()
+            // For each new query, produce a sequence of PhotoData based on a new request.
+            .map { query -> Observable<PhotoData> in
+                let title = "Sol \(query.sol)"
+                return Requests.photosRequestWithQuery(query)
+                    .map { [unowned self] (photos, rover) in
+                        // As a side effect, if we found a rover, use it to update our knowledge of available cameras and sols for querying.
+                        if let rover = rover {
+                            self.rover.value = rover
+                        }
+                        
+                        return PhotoData(title: title, photos: photos)
+                    }
+                    // If the request produces an error, represent that as a title about there being no results.
+                    .catchErrorJustReturn(PhotoData(title: "No Results", photos: []))
+                    // Before producing a value from the request, produce a value with no photos.
+                    // This updates the title immediately and clears the collection view until photos arrive.
+                    .startWith(PhotoData(title: title, photos: []))
+            }
+            // Only accept items from the sequence for the most recent request.
+            // That is, if we run two requests quickly, forget about the first one.
+            .switchLatest()
+            .bindTo(photoData)
+            .addDisposableTo(disposeBag)
+
+        // When photoData changes, show its title and reload the collection view.
+        photoData.asObservable()
             .observeOn(MainScheduler.instance)
-            .subscribeNext { [unowned self] itemSize in
+            .subscribeNext { [unowned self] photoData in
+                self.navigationItem.title = photoData.title
+                self.collectionView?.reloadData()
+            }
+            .addDisposableTo(disposeBag)
+
+        // When the item size slider changes, update the collection view layout's item size.
+        itemSizeSlider.rx_value
+            .distinctUntilChanged()
+            .map(CGFloat.init)
+            .observeOn(MainScheduler.instance)
+            .subscribeNext { [unowned self] (itemSize: CGFloat) -> Void in
                 guard let layout = self.collectionViewLayout as? UICollectionViewFlowLayout else {
                     preconditionFailure("Wrong collection view layout class")
                 }
                 
                 layout.itemSize = CGSize(width: itemSize, height: itemSize)
             }
-            .addDisposableTo(disposeBag)
+            .addDisposableTo(self.disposeBag)
     }
 
     // MARK: UIViewController
@@ -115,7 +125,7 @@ final class PhotoGridViewController: UICollectionViewController {
 
         collectionView?.registerNib(UINib(nibName: "PhotoCell", bundle: nil), forCellWithReuseIdentifier: PhotoCell.cellIdentifier)
 
-        conjureDemons()
+        bindObservables()
     }
 
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -129,9 +139,9 @@ final class PhotoGridViewController: UICollectionViewController {
 
             cameraListViewController.rover = rover.value
             cameraListViewController.selectedCameraName.value = query.value.cameraName
+
+            // When the selected camera changes, update the query.
             cameraListViewController.selectedCameraName.asObservable()
-                .skip(1)
-                .take(1)
                 .subscribeNext { [unowned self] selectedCameraName in
                     self.query.value.cameraName = selectedCameraName
                 }
@@ -142,15 +152,12 @@ final class PhotoGridViewController: UICollectionViewController {
     // MARK: UICollectionViewDataSource
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return data.value.photos.count
+        return photoData.value.photos.count
     }
 
     override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
-        let photo = data.value.photos[indexPath.row]
         let photoCell = collectionView.dequeueReusableCellWithReuseIdentifier(PhotoCell.cellIdentifier, forIndexPath: indexPath) as! PhotoCell
-
-        photoCell.photo.value = photo
-
+        photoCell.photo.value = photoData.value.photos[indexPath.row]
         return photoCell
     }
 
@@ -158,7 +165,6 @@ final class PhotoGridViewController: UICollectionViewController {
 
     override func collectionView(collectionView: UICollectionView, didEndDisplayingCell cell: UICollectionViewCell, forItemAtIndexPath indexPath: NSIndexPath) {
         let photoCell = cell as! PhotoCell
-
         photoCell.photo.value = nil
     }
 
