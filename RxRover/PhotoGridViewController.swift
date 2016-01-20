@@ -99,6 +99,26 @@ final class PhotoGridViewController: UICollectionViewController {
         conjureDemons()
     }
 
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        if segue.identifier == "PresentCameraList" {
+            guard let navigationController = segue.destinationViewController as? UINavigationController,
+                let cameraListViewController = navigationController.topViewController as? CameraListViewController
+                else
+            {
+                preconditionFailure("Bogus view controllers in storyboard.")
+            }
+
+            cameraListViewController.rover = rover.value
+            cameraListViewController.selectedCameraName.value = query.value.cameraName
+            cameraListViewController.selectedCameraName.asObservable()
+                .skip(1)
+                .take(1)
+                .subscribeNext { [unowned self] selectedCameraName in
+                    self.query.value.cameraName = selectedCameraName
+                }.addDisposableTo(disposeBag)
+        }
+    }
+
     // MARK: UICollectionViewDataSource
 
     override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

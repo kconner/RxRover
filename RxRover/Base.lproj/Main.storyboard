@@ -36,7 +36,11 @@
                     </collectionView>
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="ew4-WQ-NCq">
-                        <barButtonItem key="leftBarButtonItem" title="Camera" id="7IA-SY-4uf"/>
+                        <barButtonItem key="leftBarButtonItem" title="Camera" id="7IA-SY-4uf">
+                            <connections>
+                                <segue destination="3fq-UE-QDC" kind="presentation" identifier="PresentCameraList" id="uaV-W7-rYZ"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" id="DkK-KP-G4o">
                             <stepper key="customView" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="1" minimumValue="1" maximumValue="100" id="jDH-u8-Qnz">
                                 <rect key="frame" x="486" y="7" width="94" height="29"/>
@@ -60,6 +64,47 @@
             <point key="canvasLocation" x="109" y="192"/>
         </scene>
         <!--Navigation Controller-->
+        <scene sceneID="a6t-9W-sAa">
+            <objects>
+                <navigationController id="3fq-UE-QDC" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="6a3-VD-sFu">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="l8Y-0j-Kgg" kind="relationship" relationship="rootViewController" id="yew-a1-6ku"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Xg0-S3-klT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="863" y="192"/>
+        </scene>
+        <!--Camera List View Controller-->
+        <scene sceneID="Vxe-GW-HCd">
+            <objects>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="IQX-JD-FcV" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <tableViewController id="l8Y-0j-Kgg" customClass="CameraListViewController" customModule="RxRover" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="fHJ-ow-9ds">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="l8Y-0j-Kgg" id="rnl-IZ-TnY"/>
+                            <outlet property="delegate" destination="l8Y-0j-Kgg" id="N7Y-Lv-WMm"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" id="NOc-hs-cq6">
+                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="NlN-e1-q4h">
+                            <connections>
+                                <action selector="didTapCancelButton:" destination="l8Y-0j-Kgg" id="lPf-dD-5yC"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                </tableViewController>
+            </objects>
+            <point key="canvasLocation" x="1616" y="192"/>
+        </scene>
+        <!--Navigation Controller-->
         <scene sceneID="YpC-rd-esh">
             <objects>
                 <navigationController toolbarHidden="NO" id="FTX-em-GS0" sceneMemberID="viewController">
@@ -77,7 +122,7 @@
                 </navigationController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MZE-nH-zHg" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-713" y="192"/>
+            <point key="canvasLocation" x="-662" y="192"/>
         </scene>
     </scenes>
 </document>
