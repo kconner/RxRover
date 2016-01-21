@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 // An asynchronous read-through image cache.
 // To use it, call ImageCache.sharedCache[photo].subscribeNext { image in … }.
@@ -19,37 +20,39 @@ final class ImageCache {
 
     static let sharedCache = ImageCache()
 
-    private var imagesByPhoto: [Photo: Variable<UIImage?>] = [:]
+    private var imageSequencesByPhoto: [Photo: Driver<UIImage?>] = [:]
     private let disposeBag = DisposeBag()
 
     // Get an Observable that produces the image if it's cached, or else produces nil and then the image after downloading.
-    subscript(photo: Photo) -> Observable<UIImage?> {
-        // If we already requested this image, return its Observable sequence.
+    subscript(photo: Photo) -> Driver<UIImage?> {
+        // If we already requested this image, return its sequence.
         // It may not be done downloading yet, but we won't start any unnecessary requests.
         // Instead, we'll let the second caller subscribe to the same result as the one request.
-        if let image = imagesByPhoto[photo] {
-            return image.asObservable()
+        if let sequence = imageSequencesByPhoto[photo] {
+            return sequence
         }
 
-        // Create and store a Variable for the image.
-        let image = Variable<UIImage?>(nil)
-        imagesByPhoto[photo] = image
+        // Create a Variable for the image.
+        let subject = Variable<UIImage?>(nil)
 
         // Run a request that downloads and saves the image in the Variable.
         Requests.imageRequestWithURL(photo.photoURL)
-            .observeOn(MainScheduler.instance)
             .catchError { [unowned self] error -> Observable<UIImage?> in
                 // If we fail to get the image, remove this empty Variable from the cache and produce nil.
                 // The next time this photo is requested, we will start fresh with a new Variable and request.
-                self.imagesByPhoto[photo] = nil
+                self.imageSequencesByPhoto[photo] = nil
                 return .just(nil)
             }
-            .bindTo(image)
+            .bindTo(subject)
             .addDisposableTo(disposeBag)
+
+        // Store the sequence that reads the Variable as a Driver, which will always deliver on the main thread.
+        let sequence = subject.asDriver()
+        imageSequencesByPhoto[photo] = sequence
 
         // Return an Observable-only view of the Variable.
         // Subscribers in this case will first see nil, then the image.
-        return image.asObservable()
+        return sequence
     }
 
 }

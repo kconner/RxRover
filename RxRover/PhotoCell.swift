@@ -8,6 +8,7 @@
 
 import UIKit
 import RxSwift
+import RxCocoa
 
 // A collection view cell in the photo grid.
 // The preparer should set a Photo when the cell appears and clear it when the cell leaves the screen.
@@ -34,11 +35,11 @@ final class PhotoCell: UICollectionViewCell {
     private func bindObservables() {
         // When the photo changes, subscribe to that photo's image sequence in the ImageCache.
         // When the cache produces an image, show it in the imageView.
-        photo.asObservable()
+        photo.asDriver()
             .distinctUntilChanged(==)
             // Map each photo to an image sequence.
             // Then watch only the sequence mapped from the latest photo.
-            .flatMapLatest { photo -> Observable<UIImage?> in
+            .flatMapLatest { photo -> Driver<UIImage?> in
                 // For a nil, map to a sequence with one nil image.
                 guard let photo = photo else {
                     return .just(nil)
@@ -47,8 +48,7 @@ final class PhotoCell: UICollectionViewCell {
                 // For a photo, map to an image sequence from the cache.
                 return ImageCache.sharedCache[photo]
             }
-            .observeOn(MainScheduler.instance)
-            .subscribeNext { [weak self] image in
+            .driveNext { [weak self] image in
                 // Show or clear the image.
                 self?.imageView.image = image
             }
