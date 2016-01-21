@@ -40,9 +40,8 @@ final class PhotoGridViewController: UICollectionViewController {
         // When the rover changes, update the stepper's limit.
         // When the rover changes, use its new sol range and camera list to validate the query.
         // If it's invalid, replace it with a valid query.
-        rover.asObservable()
-            .observeOn(MainScheduler.instance)
-            .subscribeNext { [unowned self] newRover in
+        rover.asDriver()
+            .driveNext { [unowned self] newRover in
                 self.solStepper.maximumValue = Double(newRover.solMax)
 
                 if !newRover.queryIsValid(self.query.value) {
@@ -88,9 +87,8 @@ final class PhotoGridViewController: UICollectionViewController {
             .addDisposableTo(disposeBag)
 
         // When photoData changes, show its title and reload the collection view.
-        photoData.asObservable()
-            .observeOn(MainScheduler.instance)
-            .subscribeNext { [unowned self] photoData in
+        photoData.asDriver()
+            .driveNext { [unowned self] photoData in
                 self.navigationItem.title = photoData.title
                 self.collectionView?.reloadData()
             }
@@ -100,7 +98,6 @@ final class PhotoGridViewController: UICollectionViewController {
         itemSizeSlider.rx_value
             .distinctUntilChanged()
             .map(CGFloat.init)
-            .observeOn(MainScheduler.instance)
             .subscribeNext { [unowned self] (itemSize: CGFloat) -> Void in
                 guard let layout = self.collectionViewLayout as? UICollectionViewFlowLayout else {
                     preconditionFailure("Wrong collection view layout class")
@@ -140,8 +137,8 @@ final class PhotoGridViewController: UICollectionViewController {
             cameraListViewController.selectedCameraName.value = query.value.cameraName
 
             // When the selected camera changes, update the query.
-            cameraListViewController.selectedCameraName.asObservable()
-                .subscribeNext { [unowned self] selectedCameraName in
+            cameraListViewController.selectedCameraName.asDriver()
+                .driveNext { [unowned self] selectedCameraName in
                     self.query.value.cameraName = selectedCameraName
                 }
                 .addDisposableTo(disposeBag)
