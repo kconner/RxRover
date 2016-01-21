@@ -35,7 +35,10 @@ final class PhotoCell: UICollectionViewCell {
         // When the photo changes, subscribe to that photo's image sequence in the ImageCache.
         // When the cache produces an image, show it in the imageView.
         photo.asObservable()
-            .map { photo -> Observable<UIImage?> in
+            .distinctUntilChanged(==)
+            // Map each photo to an image sequence.
+            // Then watch only the sequence mapped from the latest photo.
+            .flatMapLatest { photo -> Observable<UIImage?> in
                 // For a nil, map to a sequence with one nil image.
                 guard let photo = photo else {
                     return .just(nil)
@@ -44,8 +47,6 @@ final class PhotoCell: UICollectionViewCell {
                 // For a photo, map to an image sequence from the cache.
                 return ImageCache.sharedCache[photo]
             }
-            // Watch only the sequence mapped by the latest photo value.
-            .switchLatest()
             .observeOn(MainScheduler.instance)
             .subscribeNext { [weak self] image in
                 // Show or clear the image.

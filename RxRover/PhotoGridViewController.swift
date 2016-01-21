@@ -65,7 +65,9 @@ final class PhotoGridViewController: UICollectionViewController {
         query.asObservable()
             .distinctUntilChanged()
             // For each new query, produce a sequence of PhotoData based on a new request.
-            .map { query -> Observable<PhotoData> in
+            // Then only watch the sequence for the most recent request.
+            // That is, if we run two requests quickly, forget about the first one.
+            .flatMapLatest { query -> Observable<PhotoData> in
                 let title = "Sol \(query.sol)"
                 return Requests.photosRequestWithQuery(query)
                     .map { [unowned self] (photos, rover) in
@@ -82,9 +84,6 @@ final class PhotoGridViewController: UICollectionViewController {
                     // This updates the title immediately and clears the collection view until photos arrive.
                     .startWith(PhotoData(title: title, photos: []))
             }
-            // Only accept items from the sequence for the most recent request.
-            // That is, if we run two requests quickly, forget about the first one.
-            .switchLatest()
             .bindTo(photoData)
             .addDisposableTo(disposeBag)
 
